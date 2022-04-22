@@ -1,4 +1,4 @@
-# nuxt2-cms-blog
+# nuxt3-cms-blog
 
 ## Install
 
