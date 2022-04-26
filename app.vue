@@ -10,8 +10,6 @@
 
 <style lang="stylus" scoped>
 .main-content
-  padding 30px
   width 100%
-  min-height calc(100vh - 404px)
-  box-sizing border-box
+  height 100%
 </style>

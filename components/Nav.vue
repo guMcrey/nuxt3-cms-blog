@@ -30,6 +30,7 @@
   display flex
   justify-content space-between
   align-items center
+  border-bottom 1px solid rgba(22,22,22,0.1)
 .nav-wrapper-left
   display flex
   align-items center
