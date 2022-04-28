@@ -1,10 +1,13 @@
 <template>
   <div>
+    <client-only>
+      <Fonts />
+    </client-only>
     <Nav></Nav>
     <div class="main-content">
-      <NuxtPage></NuxtPage>
+      <NuxtPage />
     </div>
-    <Footer></Footer>
+    <Footer />
   </div>
 </template>
 

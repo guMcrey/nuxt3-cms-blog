@@ -65,6 +65,8 @@
 .article-top
   color #8500FE
   font-size 13px
+  font-family 'NotoSans'
+  font-weight 400
   .step
     display inline-block
     width 3px
@@ -78,6 +80,8 @@
   margin-top 12px
   font-weight 500
   color #1c2b33
+  font-family 'NotoSans'
+  font-weight 500
 .article-content
   font-size 15px
   margin-top 10px
@@ -87,6 +91,8 @@
   -webkit-box-orient vertical
   -webkit-line-clamp 5
   overflow hidden
+  font-family 'NotoSans'
+  font-weight 400
 
 .article-footer
   position absolute
@@ -106,6 +112,8 @@
   border-radius 20px
   font-size 12px
   margin-right 10px
+  font-family 'NotoSans'
+  font-weight 400
 .dark
   color #467392
   background-color rgba(231,249,254,1)
@@ -122,6 +130,7 @@
   font-size 13px
   color #1c2b33
   font-weight 500
+  font-family 'NotoSans'
 .read-info-icon
   display block
   width 18px
@@ -138,5 +147,6 @@
   margin-left 10px
   font-size 14px
   color #1c2b33
-  font-weight 500
+  font-weight 600
+  font-family 'NotoSans'
 </style>

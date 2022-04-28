@@ -52,6 +52,8 @@
     margin-top 32px
     font-size 13px
     color #222
+    font-family 'NotoSans'
+    font-weight 400
   .footer-follow-icon
     display flex
     align-items center
@@ -76,9 +78,11 @@
     filter drop-shadow(200px 0 #BD232A)
 .footer-wrapper-bottom
   background-color #fff
-  padding 25px 72px
+  padding 20px 72px
   color #172c34
   font-size 13px
+  font-family 'NotoSans'
+  font-weight 400
 img
   max-width 100%
   max-height 100%

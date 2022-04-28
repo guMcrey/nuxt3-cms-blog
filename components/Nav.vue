@@ -41,6 +41,8 @@
   font-size 17px
   font-weight normal
   padding 3px
+  font-family 'NotoSans'
+  font-weight 400
   &:hover
     border-bottom 1px solid #8500FE
 .logo-img

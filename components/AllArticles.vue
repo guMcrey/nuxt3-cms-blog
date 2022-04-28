@@ -51,6 +51,8 @@ defineProps({
   margin-top 15px
   color #374857
   font-size 13px
+  font-family 'NotoSans'
+  font-weight 400
   .step
     display inline-block
     width 3px
@@ -64,6 +66,8 @@ defineProps({
   color #1c2b33
   font-weight 600
   font-size 18px
+  font-family 'NotoSans'
+  font-weight 500
 .item-content-description
   margin-top 12px
   color #1c2b33
@@ -73,6 +77,8 @@ defineProps({
   -webkit-box-orient vertical
   -webkit-line-clamp 3
   overflow hidden
+  font-family 'NotoSans'
+  font-weight 400
 .item-footer
   margin-top 30px
   display flex
@@ -83,7 +89,8 @@ defineProps({
   height 26px
 .more-text
   margin-left 10px
-  font-size 13px
+  font-size 14px
   color #1c2b33
+  font-family 'NotoSans'
   font-weight 600
 </style>
