@@ -12,6 +12,9 @@
         :articleInfo="item"
       />
     </ul>
+    <div class="load-more-area">
+      <span class="load-more-btn">Load more articles</span>
+    </div>
   </div>
 </template>
 
@@ -72,4 +75,19 @@ const allArticle = reactive([
   justify-content space-between
 .all-news-list
   margin-top 30px
+
+// load more
+.load-more-area
+  margin 65px 0 80px
+  text-align center
+.load-more-btn
+  padding 12px 82px
+  font-size 16px
+  font-family "NotoSans"
+  font-weight 500
+  background-color #8500FE
+  color #fff
+  border-radius 4px
+  &:hover
+    background-color rgba(133,0,254, 0.8)
 </style>
