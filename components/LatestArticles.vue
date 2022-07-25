@@ -52,7 +52,7 @@
 .list-item
   display flex
   align-items flex-start
-  gap 40px
+  gap 50px
 .item-image
   width 500px
   img

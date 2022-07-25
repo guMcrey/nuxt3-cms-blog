@@ -14,7 +14,17 @@
         <div class="articles-detail-title">
           The Weekly Planet: An Outdated Idea Is Still Shaping Climate Policy
         </div>
-        <div class="articles-detail-time">April 25, 2022</div>
+        <div class="articles-detail-area">
+          <div class="articles-detail-time">April 25, 2022</div>
+          <div class="articles-detail-read">
+            <img
+              class="read-info-icon"
+              src="@/assets/images/icons/view-eye.svg"
+              alt="reads"
+            />
+            1.6k Reads
+          </div>
+        </div>
       </div>
       <div class="articles-content">
         <div class="articles-content-main-img">
@@ -29,7 +39,30 @@
         </div>
       </div>
     </div>
-    <div class="page-articles-right"></div>
+    <div class="page-articles-right">
+      <ul class="articles-related">
+        <div class="related-title">Related articles</div>
+        <li class="articles-tag">Vue</li>
+        <li class="articles-tag">Typescript</li>
+      </ul>
+      <ul class="articles-share">
+        <div class="share-title">Share</div>
+        <div class="share-item-wrapper">
+          <li class="share-item">
+            <img src="@/assets/images/icons/wechat.svg" alt="wechat" />
+          </li>
+          <li class="share-item">
+            <img src="@/assets/images/icons/linkedin.svg" alt="linkedin" />
+          </li>
+          <li class="share-item">
+            <img src="@/assets/images/icons/facebook.svg" alt="facebook" />
+          </li>
+          <li class="share-item">
+            <img src="@/assets/images/icons/weibo.svg" alt="weibo" />
+          </li>
+        </div>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -72,12 +105,30 @@
   font-weight 500
   font-size 42px
   color #344854
+
+.articles-detail-area
+  margin-top 20px
+  display flex
+  align-items center
+  justify-content flex-start
+  gap 50px
 .articles-detail-time
   font-size 14px
   font-family "NotoSans"
   font-weight 400
   color #666
-  margin-top 20px
+
+.articles-detail-read
+  display flex
+  align-items center
+  font-size 13px
+  color #666
+  font-family 'NotoSans'
+.read-info-icon
+  display block
+  width 18px
+  height auto
+  margin-right 8px
 .articles-content
   margin-top 48px
 .articles-content-main-img
@@ -96,4 +147,38 @@
 // right
 .page-articles-right
   margin-top 50px
+.articles-related
+  font-family "NotoSans"
+  font-weight 400
+.related-title
+  font-size 18px
+  color #677b8c
+.articles-tag
+  padding 6px 0
+  color #000
+  font-size 16px
+  &:hover
+    cursor pointer
+    font-weight 500
+.articles-tag:first-of-type
+    margin-top 18px
+.articles-share
+  margin-top 30px
+  padding 20px 0
+  font-family "NotoSans"
+  font-weight 400
+  border-top 1px solid hsla(0,0%,9%,.1)
+  border-bottom 1px solid hsla(0,0%,9%,.1)
+.share-title
+  font-size 16px
+  color #677b8c
+.share-item-wrapper
+  margin-top 20px
+  display flex
+  align-items center
+  gap 20px
+.share-item
+  img
+    width 30px
+    height 30px
 </style>

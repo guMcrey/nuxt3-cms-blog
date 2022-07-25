@@ -2,7 +2,7 @@
   <div class="page-index">
     <div class="index-latest-title">Latest</div>
     <ul class="latest-list">
-      <LatestArticles></LatestArticles>
+      <LatestArticles @click="clickItemHandler"></LatestArticles>
     </ul>
     <div class="index-all-title">All</div>
     <ul class="all-news-list">
@@ -53,6 +53,8 @@ const allArticle = reactive([
       ' Maecenas consectetur pharetra nisi, vel congue ligula tempor quis. Sed turpis lorem, tempor varius pharetra pretium, varius at lorem. Nam viverra blandit massa id vehicula. Ut feugiat in erat vitae lacinia.',
   },
 ])
+
+const clickItemHandler = () => {}
 </script>
 
 <style lang="stylus" scoped>
