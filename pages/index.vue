@@ -10,6 +10,7 @@
         v-for="item in allArticle"
         :key="item.articleId"
         :articleInfo="item"
+        @click="clickItemHandler(item.article_id)"
       />
     </ul>
     <div class="load-more-area">
@@ -21,40 +22,18 @@
 <script lang="ts" setup>
 import {reactive} from 'vue'
 
-const allArticle = reactive([
-  {
-    articleId: 1,
-    mainPicture: 'article-placeholder',
-    author: 'hakuna',
-    publishTime: '2022-04-22',
-    title:
-      'The Weekly Planet: An Outdated Idea Is Still Shaping Climate Policy',
-    description:
-      ' Maecenas consectetur pharetra nisi, vel congue ligula tempor quis. Sed turpis lorem, tempor varius pharetra pretium, varius at lorem.',
-  },
-  {
-    articleId: 2,
-    mainPicture: 'article-placeholder',
-    author: 'hakuna',
-    publishTime: '2022-04-22',
-    title:
-      'The Weekly Planet: An Outdated Idea Is Still Shaping Climate Policy',
-    description:
-      ' Maecenas consectetur pharetra nisi, vel congue ligula tempor quis. Sed turpis lorem, tempor varius pharetra pretium, varius at lorem.',
-  },
-  {
-    articleId: 3,
-    mainPicture: 'article-placeholder',
-    author: 'hakuna',
-    publishTime: '2022-04-22',
-    title:
-      'The Weekly Planet: An Outdated Idea Is Still Shaping Climate Policy',
-    description:
-      ' Maecenas consectetur pharetra nisi, vel congue ligula tempor quis. Sed turpis lorem, tempor varius pharetra pretium, varius at lorem. Nam viverra blandit massa id vehicula. Ut feugiat in erat vitae lacinia.',
-  },
-])
+const router = useRouter()
 
-const clickItemHandler = () => {}
+const {data: articles} = await useFetch('http://localhost:3000/api/articles')
+
+// TODO: 分页
+const allArticle = (articles.value as any).result?.slice(0, 3)
+
+const clickItemHandler = (articleId: number) => {
+  router.push({
+    path: `/articles/${articleId}`,
+  })
+}
 </script>
 
 <style lang="stylus" scoped>

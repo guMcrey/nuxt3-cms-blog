@@ -4,12 +4,28 @@
       <div class="logo-img">
         <img src="@/assets/images/blog-logo.png" alt="logo" />
       </div>
-      <li class="nav-item">
-        <span class="nav-item-title">Home</span>
-      </li>
-      <li class="nav-item">
-        <span class="nav-item-title">About Me</span>
-      </li>
+      <NuxtLink to="/">
+        <li class="nav-item">
+          <span
+            :class="
+              route.path === '/' ? 'nav-item-title active' : 'nav-item-title'
+            "
+            >Home</span
+          >
+        </li>
+      </NuxtLink>
+      <NuxtLink to="/about-me">
+        <li class="nav-item">
+          <span
+            :class="
+              route.path === '/about-me'
+                ? 'nav-item-title active'
+                : 'nav-item-title'
+            "
+            >About Me</span
+          >
+        </li>
+      </NuxtLink>
     </ul>
     <ul class="nav-wrapper-right">
       <li class="search-btn">
@@ -22,6 +38,10 @@
     </ul>
   </div>
 </template>
+
+<script lang="ts" setup>
+const route = useRoute()
+</script>
 
 <style lang="stylus" scoped>
 .nav-wrapper
@@ -44,7 +64,9 @@
   font-family 'NotoSans'
   font-weight 400
   &:hover
-    border-bottom 1px solid #8500FE
+    border-bottom 2px solid #8500FE
+.active
+  border-bottom 2px solid #8500FE
 .logo-img
   width 110px
   height auto

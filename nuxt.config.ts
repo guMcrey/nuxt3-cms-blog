@@ -7,8 +7,14 @@ export default defineNuxtConfig({
     shim: false,
     strict: true,
   },
-  server: {
-    port: 3003,
-    host: '0.0.0.0',
+  vite: {
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3000',
+          changeOrigin: true,
+        },
+      },
+    },
   },
 })

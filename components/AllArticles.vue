@@ -1,13 +1,20 @@
 <template>
   <li class="list-item">
     <div class="item-top">
-      <img src="~/assets/images/article-placeholder.png" alt="article" />
+      <img
+        :src="
+          (articleInfo.main_img &&
+            `http://localhost:3000/images/${articleInfo.main_img}`) ||
+          defaultArticleImg
+        "
+        alt="article"
+      />
     </div>
     <div class="item-content">
       <div class="item-content-time">
         <span class="author-name">By {{ articleInfo.author }}</span>
         <span class="step"></span>
-        <span class="article-time">{{ articleInfo.publishTime }}</span>
+        <span class="article-time">{{ articleInfo.publish_time }}</span>
       </div>
       <div class="item-content-title">
         {{ articleInfo.title }}
@@ -29,6 +36,7 @@
 
 <script lang="ts" setup>
 import {ref} from 'vue'
+import defaultArticleImg from '@/assets/images/article-placeholder.png'
 
 defineProps({
   articleInfo: {
@@ -40,10 +48,11 @@ defineProps({
 
 <style lang="stylus" scoped>
 .list-item
-  width 382px
+  width 377px
 .item-top
-  width 382px
-  height auto
+  width 377px
+  max-height 301px
+  overflow hidden
   img
     max-width 100%
     max-height 100%
@@ -79,6 +88,7 @@ defineProps({
   overflow hidden
   font-family 'NotoSans'
   font-weight 400
+  min-height 72px
 .item-footer
   margin-top 30px
   display flex

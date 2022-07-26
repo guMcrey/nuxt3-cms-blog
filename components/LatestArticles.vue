@@ -1,28 +1,31 @@
 <template>
-  <li class="list-item">
+  <li v-for="item in latestArticles" :key="item.article_id" class="list-item">
     <div class="item-image">
-      <img src="@/assets/images/article-placeholder.png" alt="article" />
+      <img
+        :src="
+          (item.main_img && `http://localhost:3000/images/${item.main_img}`) ||
+          defaultArticleImg
+        "
+        alt="article"
+      />
     </div>
     <div class="item-article">
       <div class="article-top">
-        <span class="author-name">By hakuna</span>
+        <span class="author-name">By {{ item.author }}</span>
         <span class="step"></span>
-        <span class="article-time">2022-04-22</span>
+        <span class="article-time">{{ item.publish_time }}</span>
       </div>
       <div class="article-title">
-        The Weekly Planet: An Outdated Idea Is Still Shaping Climate Policy
+        {{ item.title }}
       </div>
       <div class="article-content">
-        Maecenas consectetur pharetra nisi, vel congue ligula tempor quis. Sed
-        turpis lorem, tempor varius pharetra pretium, varius at lorem. Nam
-        viverra blandit massa id vehicula. Ut feugiat in erat vitae lacinia.
-        Etiam tincidunt eros vitae neque iaculis elementum. Etiam vestibulum
-        scelerisque nisl in placerat. Curabitur ultrices quam et ligula congue
+        {{ item.description }}
       </div>
       <div class="article-footer">
         <div class="article-tag">
-          <span class="tag-item">Vue</span>
-          <span class="tag-item dark">Typescript</span>
+          <span class="tag-item" v-for="tItem in item.tag" :key="tItem">{{
+            tItem
+          }}</span>
         </div>
         <div class="footer-read-more">
           <div class="read-info">
@@ -47,14 +50,26 @@
   </li>
 </template>
 
+<script lang="ts" setup>
+import defaultArticleImg from '@/assets/images/article-placeholder.png'
+const {data: articles} = await useFetch('http://localhost:3000/api/articles')
+
+// TODO: 获取最新文章
+const latestArticles = [(articles.value as any).result[2]]
+</script>
+
 <style lang="stylus" scoped>
 // latest article
 .list-item
   display flex
   align-items flex-start
   gap 50px
+  &:hover
+    cursor pointer
 .item-image
   width 500px
+  max-height 310px
+  overflow hidden
   img
     height 100%
     width 100%
@@ -106,6 +121,7 @@
   align-items center
   margin-top 10px
 .tag-item
+  display inline-block
   padding 3px 12px
   background-color rgba(247,242,253,1)
   color #8500FE
@@ -114,9 +130,9 @@
   margin-right 10px
   font-family 'NotoSans'
   font-weight 400
-.dark
-  color #467392
-  background-color rgba(231,249,254,1)
+  &:nth-child(2n)
+    color #467392
+    background-color rgba(231,249,254,1)
 
 .footer-read-more
   margin-top 17px
