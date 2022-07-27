@@ -52,7 +52,7 @@
 
 <script lang="ts" setup>
 import defaultArticleImg from '@/assets/images/article-placeholder.png'
-const {data: articles} = await useFetch('http://localhost:3000/api/articles')
+const {data: articles} = await useFetch('http://localhost:3001/api/articles')
 
 // TODO: 获取最新文章
 const latestArticles = [(articles.value as any).result[2]]

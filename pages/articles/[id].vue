@@ -41,7 +41,7 @@
             />
           </div>
           <div class="articles-content-text">
-            {{ articleInfo.content }}
+            <span v-html="articleInfo.content"></span>
           </div>
         </div>
       </div>
@@ -79,15 +79,25 @@ import defaultArticleImg from '@/assets/images/article-placeholder.png'
 const route = useRoute()
 const router = useRouter()
 
-const {data} = await useFetch(`/api/articles/${route.params.id}`, {
-  key: `${route.params.id}`,
-})
+const {data} = await useFetch(
+  `http://localhost:3001/api/articles/${route.params.id}`,
+  {
+    key: `${route.params.id}`,
+  }
+)
 
 const articleInfo = (data.value as any).result
 
 const backToList = () => {
   router.push({path: '/'})
 }
+
+onMounted(async () => {
+  const win = window as any
+  setTimeout(() => {
+    win.Prism.highlightAll()
+  }, 50)
+})
 </script>
 
 <style lang="stylus" scoped>
@@ -104,6 +114,7 @@ const backToList = () => {
   margin-bottom 50px
 .page-articles-left
   width 886px
+  word-wrap break-word
 .page-articles-right
   width 223px
 .back-area-btn

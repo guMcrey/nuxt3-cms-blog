@@ -24,7 +24,7 @@ import {reactive} from 'vue'
 
 const router = useRouter()
 
-const {data: articles} = await useFetch('http://localhost:3000/api/articles')
+const {data: articles} = await useFetch('http://localhost:3001/api/articles')
 
 // TODO: 分页
 const allArticle = (articles.value as any).result?.slice(0, 3)
