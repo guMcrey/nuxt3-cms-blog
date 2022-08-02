@@ -9,6 +9,7 @@
         "
         alt="article"
       />
+      <div class="img-wrap-mark"></div>
     </div>
     <div class="item-content">
       <div class="item-content-time">
@@ -48,14 +49,33 @@ defineProps({
 
 <style lang="stylus" scoped>
 .list-item
-  width 377px
+  max-width 377px
+  &:hover .item-top > img
+    transform scale(1.08)
+    transition all 0.3s linear
+    cursor pointer
+  &:hover .img-wrap-mark
+    opacity 1
 .item-top
+  transition all 0.6s
+  position relative
   width 377px
-  max-height 301px
+  height 301px
   overflow hidden
+  box-shadow 0 1px 15px rgba(0,0,0,0.04)
   img
     max-width 100%
     max-height 100%
+    transition all 0.6s
+.img-wrap-mark
+  transition all 0.6s
+  opacity 0
+  position absolute
+  top 0
+  right 0
+  bottom 0
+  left 0
+  background-color rgba(0, 0, 0, 0.1)
 .item-content-time
   margin-top 15px
   color #374857

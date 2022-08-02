@@ -1,9 +1,11 @@
 <template>
   <div class="nav-wrapper">
     <ul class="nav-wrapper-left">
-      <div class="logo-img">
-        <img src="@/assets/images/blog-logo.png" alt="logo" />
-      </div>
+      <NuxtLink to="/">
+        <div class="logo-img">
+          <img src="@/assets/images/blog-logo.png" alt="logo" />
+        </div>
+      </NuxtLink>
       <NuxtLink to="/">
         <li class="nav-item">
           <span
@@ -28,7 +30,7 @@
       </NuxtLink>
     </ul>
     <ul class="nav-wrapper-right">
-      <li class="search-btn">
+      <li class="search-btn" @click="showSearchDialog = true">
         <img
           class="search-icon"
           src="@/assets/images/icons/search.svg"
@@ -37,10 +39,12 @@
       </li>
     </ul>
   </div>
+  <Search v-if="showSearchDialog"></Search>
 </template>
 
 <script lang="ts" setup>
 const route = useRoute()
+const showSearchDialog = ref(false)
 </script>
 
 <style lang="stylus" scoped>

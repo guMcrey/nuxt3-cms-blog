@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     shim: false,
     strict: true,
   },
+  server: {
+    port: 3001,
+  },
   proxy: {
     options: {
       target: 'http://localhost:3000',

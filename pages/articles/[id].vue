@@ -48,8 +48,13 @@
       <div class="page-articles-right">
         <ul class="articles-related">
           <div class="related-title">Related articles</div>
-          <li class="articles-tag">Vue</li>
-          <li class="articles-tag">Typescript</li>
+          <li
+            class="articles-tag"
+            v-for="tagItem in articleInfo.tag"
+            :key="tagItem"
+          >
+            {{ tagItem }}
+          </li>
         </ul>
         <ul class="articles-share">
           <div class="share-title">Share</div>
@@ -87,6 +92,13 @@ const {data} = await useFetch(
 )
 
 const articleInfo = (data.value as any).result
+
+if (!articleInfo.tag.length) {
+  const {data: tags} = await useFetch('http://localhost:3001/api/tags')
+  articleInfo.tag = (tags.value as any).result.map(
+    (_: {tag_name: string}) => _.tag_name
+  )
+}
 
 const backToList = () => {
   router.push({path: '/'})
@@ -189,14 +201,14 @@ onMounted(async () => {
   font-size 18px
   color #677b8c
 .articles-tag
-  padding 6px 0
+  padding 10px 0
   color #000
   font-size 16px
   &:hover
     cursor pointer
     font-weight 500
 .articles-tag:first-of-type
-    margin-top 18px
+    margin-top 15px
 .articles-share
   margin-top 30px
   padding 20px 0

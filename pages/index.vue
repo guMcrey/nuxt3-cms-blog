@@ -13,8 +13,15 @@
         @click="clickItemHandler(item.article_id)"
       />
     </ul>
-    <div class="load-more-area">
-      <span class="load-more-btn">Load more articles</span>
+    <div class="load-more-area" @click="loadMore">
+      <span
+        :class="
+          pagination.total / pagination.pageSize >= pagination.pageNum
+            ? 'load-more-btn'
+            : 'load-more-btn-disabled'
+        "
+        >Load more articles</span
+      >
     </div>
   </div>
 </template>
@@ -22,12 +29,35 @@
 <script lang="ts" setup>
 import {reactive} from 'vue'
 
+useHead({
+  title: "Hakuna's Blog - Home",
+})
+
 const router = useRouter()
+const pagination = reactive({
+  pageNum: 1,
+  pageSize: 3,
+  total: 0,
+})
+const allArticle = ref<any[]>([])
 
-const {data: articles} = await useFetch('http://localhost:3001/api/articles')
+const {data: articles} = await useFetch(
+  `http://localhost:3001/api/articles/page?page_num=${pagination.pageNum}&page_size=${pagination.pageSize}`
+)
 
-// TODO: 分页
-const allArticle = (articles.value as any).result?.slice(0, 3)
+allArticle.value = (articles.value as any).result
+Object.assign(pagination, (articles.value as any).page)
+
+const loadMore = async () => {
+  if (pagination.total / pagination.pageSize < pagination.pageNum) return
+  const {data: articles} = await useFetch(
+    `http://localhost:3001/api/articles/page?page_num=${
+      pagination.pageNum + 1
+    }&page_size=${pagination.pageSize}`
+  )
+  allArticle.value = allArticle.value.concat((articles.value as any).result)
+  Object.assign(pagination, (articles.value as any).page)
+}
 
 const clickItemHandler = (articleId: number) => {
   router.push({
@@ -51,9 +81,10 @@ const clickItemHandler = (articleId: number) => {
   color #1C2B33
 .all-news-list
   display flex
-  gap 30px
-  align-center flex-start
-  justify-content space-between
+  gap 80px 45px
+  align-items flex-start
+  justify-content flex-start
+  flex-wrap wrap
 .all-news-list
   margin-top 30px
 
@@ -71,4 +102,13 @@ const clickItemHandler = (articleId: number) => {
   border-radius 4px
   &:hover
     background-color rgba(133,0,254, 0.8)
+
+.load-more-btn-disabled
+  padding 12px 82px
+  font-size 16px
+  font-family "NotoSans"
+  font-weight 500
+  color #fff
+  border-radius 4px
+  background-color #d0d0d0
 </style>
