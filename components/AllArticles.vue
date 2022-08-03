@@ -113,6 +113,9 @@ defineProps({
   margin-top 30px
   display flex
   align-items center
+  &:hover .more-text, .more-icon
+    color #737373
+    transition all 0.3s
 .more-icon
   display block
   width 26px

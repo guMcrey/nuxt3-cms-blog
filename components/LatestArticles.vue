@@ -1,53 +1,56 @@
 <template>
-  <li v-for="item in latestArticles" :key="item.article_id" class="list-item">
-    <div class="item-image">
-      <img
-        :src="
-          (item.main_img && `http://localhost:3000/images/${item.main_img}`) ||
-          defaultArticleImg
-        "
-        alt="article"
-      />
-    </div>
-    <div class="item-article">
-      <div class="article-top">
-        <span class="author-name">By {{ item.author }}</span>
-        <span class="step"></span>
-        <span class="article-time">{{ item.publish_time }}</span>
+  <div>
+    <li v-for="item in latestArticles" :key="item.article_id" class="list-item">
+      <div class="item-image">
+        <img
+          :src="
+            (item.main_img &&
+              `http://localhost:3000/images/${item.main_img}`) ||
+            defaultArticleImg
+          "
+          alt="article"
+        />
       </div>
-      <div class="article-title">
-        {{ item.title }}
-      </div>
-      <div class="article-content">
-        {{ item.description }}
-      </div>
-      <div class="article-footer">
-        <div class="article-tag">
-          <span class="tag-item" v-for="tItem in item.tag" :key="tItem">{{
-            tItem
-          }}</span>
+      <div class="item-article">
+        <div class="article-top">
+          <span class="author-name">By {{ item.author }}</span>
+          <span class="step"></span>
+          <span class="article-time">{{ item.publish_time }}</span>
         </div>
-        <div class="footer-read-more">
-          <div class="read-info">
-            <img
-              class="read-info-icon"
-              src="@/assets/images/icons/view-eye.svg"
-              alt="reads"
-            />
-            1.6k Reads
+        <div class="article-title">
+          {{ item.title }}
+        </div>
+        <div class="article-content">
+          {{ item.description }}
+        </div>
+        <div class="article-footer">
+          <div class="article-tag">
+            <span class="tag-item" v-for="tItem in item.tag" :key="tItem">{{
+              tItem
+            }}</span>
           </div>
-          <div class="more-area">
-            <img
-              class="more-icon"
-              src="@/assets/images/icons/more-btn.svg"
-              alt="more"
-            />
-            <span class="more-text">Learn More</span>
+          <div class="footer-read-more">
+            <div class="read-info">
+              <img
+                class="read-info-icon"
+                src="@/assets/images/icons/view-eye.svg"
+                alt="reads"
+              />
+              1.6k Reads
+            </div>
+            <div class="more-area">
+              <img
+                class="more-icon"
+                src="@/assets/images/icons/more-btn.svg"
+                alt="more"
+              />
+              <span class="more-text">Learn More</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </li>
+    </li>
+  </div>
 </template>
 
 <script lang="ts" setup>

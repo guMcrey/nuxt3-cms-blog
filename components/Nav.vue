@@ -38,8 +38,8 @@
         />
       </li>
     </ul>
+    <Search v-if="showSearchDialog" @close="showSearchDialog = false"></Search>
   </div>
-  <Search v-if="showSearchDialog"></Search>
 </template>
 
 <script lang="ts" setup>
