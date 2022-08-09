@@ -55,6 +55,16 @@
           >
             {{ tagItem }}
           </li>
+          <div
+            v-if="
+              pagination.total / pagination.pageNumber > pagination.pageSize
+            "
+            class="pagination-area"
+            @click="loadMoreHandler"
+          >
+            <img src="@/assets/images/icons/next-btn.svg" alt="more" />
+            Next
+          </div>
         </ul>
         <ul class="articles-share">
           <div class="share-title">Share</div>
@@ -83,6 +93,11 @@ import defaultArticleImg from '@/assets/images/article-placeholder.png'
 
 const route = useRoute()
 const router = useRouter()
+const pagination = reactive({
+  pageNumber: 1,
+  pageSize: 4,
+  total: 0,
+})
 
 const {data} = await useFetch(
   `http://localhost:3001/api/articles/${route.params.id}`,
@@ -93,18 +108,31 @@ const {data} = await useFetch(
 
 const articleInfo = (data.value as any).result
 
-if (!articleInfo.tag.length) {
-  const {data: tags} = await useFetch('http://localhost:3001/api/tags')
+const searchTagHandler = async (pageNumber: number, pageSize: number) => {
+  if (articleInfo.tag.length && pageNumber <= 1) return
+  const {
+    data: tags,
+  } = await useFetch(
+    `http://localhost:3001/api/tags/page?page_number=${pageNumber}&page_size=${pageSize}`,
+    {key: Math.random().toString()}
+  )
   articleInfo.tag = (tags.value as any).result.map(
     (_: {tag_name: string}) => _.tag_name
   )
+  Object.assign(pagination, (tags.value as any).page)
 }
 
 const backToList = () => {
   router.push({path: '/'})
 }
 
+const loadMoreHandler = () => {
+  Object.assign(pagination, {pageNumber: pagination.pageNumber + 1})
+  searchTagHandler(pagination.pageNumber, pagination.pageSize)
+}
+
 onMounted(async () => {
+  searchTagHandler(pagination.pageNumber, pagination.pageSize)
   const win = window as any
   setTimeout(() => {
     win.Prism.highlightAll()
@@ -125,8 +153,9 @@ onMounted(async () => {
   justify-content space-between
   margin-bottom 50px
 .page-articles-left
-  width 886px
+  max-width 886px
   word-wrap break-word
+  overflow hidden
 .page-articles-right
   width 223px
 .back-area-btn
@@ -228,4 +257,18 @@ onMounted(async () => {
   img
     width 30px
     height 30px
+.pagination-area
+  display flex
+  align-items center
+  gap 5px
+  margin-top 25px
+  font-size 13px
+  font-family "NotoSans"
+  color #677b8c
+  img
+    width 16px
+    height 16px
+  &:hover
+    font-weight bold
+    cursor pointer
 </style>

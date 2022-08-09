@@ -81,8 +81,8 @@ const showSearchDialog = ref(false)
     max-width 100%
     max-height 100%
 .search-btn
-  width 38px
-  height 38px
+  width 35px
+  height 35px
   background-color #ECECEC
   border-radius 100%
   text-align center
@@ -92,6 +92,8 @@ const showSearchDialog = ref(false)
     height auto
 .search-btn:hover
   background-color #8500FE
+  transition all 0.3s linear
+  cursor pointer
   .search-icon
     transform translateY(-200px)
     filter drop-shadow(0 200px #fff)

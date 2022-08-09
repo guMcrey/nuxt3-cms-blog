@@ -9,3 +9,8 @@ ol, ul {
 a {
     text-decoration: none;
 }
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}

@@ -53,7 +53,12 @@ const loadMore = async () => {
   const {data: articles} = await useFetch(
     `http://localhost:3001/api/articles/page?page_num=${
       pagination.pageNum + 1
-    }&page_size=${pagination.pageSize}`
+    }&page_size=${pagination.pageSize}`,
+    {
+      key: `/api/articles/page?page_num=${pagination.pageNum + 1}&page_size=${
+        pagination.pageSize
+      }`,
+    }
   )
   allArticle.value = allArticle.value.concat((articles.value as any).result)
   Object.assign(pagination, (articles.value as any).page)
