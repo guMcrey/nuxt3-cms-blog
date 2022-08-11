@@ -2,7 +2,7 @@
   <div class="page-index">
     <div class="index-latest-title">Latest</div>
     <ul class="latest-list">
-      <LatestArticles @click="clickItemHandler"></LatestArticles>
+      <LatestArticles></LatestArticles>
     </ul>
     <div class="index-all-title">All</div>
     <ul class="all-news-list">

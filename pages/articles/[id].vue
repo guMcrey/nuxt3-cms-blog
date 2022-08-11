@@ -1,13 +1,6 @@
 <template>
   <div>
-    <div class="back-area" @click="backToList">
-      <img
-        class="back-area-btn"
-        src="@/assets/images/icons/more-btn.svg"
-        alt="back"
-      />
-      <span class="back-area-text">Back to list</span>
-    </div>
+    <BackToList @click="backToList"></BackToList>
     <div class="page-articles">
       <div class="page-articles-left">
         <div class="articles-detail">
@@ -52,6 +45,7 @@
             class="articles-tag"
             v-for="tagItem in articleInfo.tag"
             :key="tagItem"
+            @click="clickTagHandler(tagItem)"
           >
             {{ tagItem }}
           </li>
@@ -131,6 +125,15 @@ const loadMoreHandler = () => {
   searchTagHandler(pagination.pageNumber, pagination.pageSize)
 }
 
+const clickTagHandler = (tagName: string) => {
+  router.push({
+    path: `/tags`,
+    query: {
+      tag: tagName,
+    },
+  })
+}
+
 onMounted(async () => {
   searchTagHandler(pagination.pageNumber, pagination.pageSize)
   const win = window as any
@@ -141,11 +144,6 @@ onMounted(async () => {
 </script>
 
 <style lang="stylus" scoped>
-.back-area
-  padding 0 100px
-  margin-top 40px
-  display flex
-  align-items center
 .page-articles
   padding 0 100px
   display flex
@@ -158,15 +156,6 @@ onMounted(async () => {
   overflow hidden
 .page-articles-right
   width 223px
-.back-area-btn
-  width 36px
-  height 36px
-  transform rotate(180deg)
-.back-area-text
-  margin-left 15px
-  font-size 16px
-  font-weight 400
-  font-family "NotoSans"
 .articles-detail
   margin-top 50px
 .articles-detail-author

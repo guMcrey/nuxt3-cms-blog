@@ -1,36 +1,45 @@
 <template>
   <div class="page-tags">
+    <BackToList @click="backToList"></BackToList>
+
     <TagArticle
       class="tag-articles"
       v-for="item in allArticle"
       :key="item.article_id"
       :articleInfo="item"
     ></TagArticle>
+
+    <div v-show="!allArticle.length" class="article-no-result">
+      No related articles found.
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {onMounted} from 'vue'
-
-const pagination = reactive({
-  pageNum: 1,
-  pageSize: 3,
-  total: 0,
-})
+const router = useRouter()
+const route = useRoute()
 const allArticle = ref<any[]>([])
 
-// TODO: tag query
-const {data: articles} = await useFetch(
-  `http://localhost:3001/api/articles/page?tag=TypeScript&page_num=${pagination.pageNum}&page_size=${pagination.pageSize}`
+const {
+  data: articles,
+} = await useFetch(
+  `http://localhost:3001/api/articles?publish_status=publish&tag=${route.query.tag}`,
+  {key: `${route.query.tag}`}
 )
 allArticle.value = (articles.value as any)?.result
-Object.assign(pagination, (articles.value as any)?.page)
+
+const backToList = () => {
+  router.back()
+}
 </script>
 
 <style lang="stylus" scoped>
-.page-tags
-  padding 0 100px
-  margin 50px 0
 .tag-articles
-  margin-bottom 80px
+  &:nth-child(2n + 1)
+    background-color rgba(247, 242, 238, 0.7)
+.article-no-result
+  font-size 18px
+  font-family "NotoSans"
+  font-weight 500
+  margin 50px 110px
 </style>

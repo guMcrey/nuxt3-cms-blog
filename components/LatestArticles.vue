@@ -1,6 +1,11 @@
 <template>
   <div>
-    <li v-for="item in latestArticles" :key="item.article_id" class="list-item">
+    <li
+      v-for="item in latestArticles"
+      :key="item.article_id"
+      class="list-item"
+      @click="clickItemHandler(item.article_id)"
+    >
       <div class="item-image">
         <img
           :src="
@@ -56,9 +61,14 @@
 <script lang="ts" setup>
 import defaultArticleImg from '@/assets/images/article-placeholder.png'
 const {data: articles} = await useFetch('http://localhost:3001/api/articles')
+const router = useRouter()
 
 // TODO: 获取最新文章
 const latestArticles = [(articles.value as any).result[2]]
+
+const clickItemHandler = (id: number) => {
+  router.push({path: `/articles/${id}`})
+}
 </script>
 
 <style lang="stylus" scoped>
