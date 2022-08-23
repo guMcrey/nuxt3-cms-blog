@@ -2,17 +2,16 @@
   <li class="list-item">
     <div class="item-top">
       <img
-        :src="
-          (articleInfo.main_img &&
-            `http://localhost:3000/images/${articleInfo.main_img}`) ||
-          defaultArticleImg
-        "
+        v-if="articleInfo.main_img"
+        :src="`http://localhost:3000/images/${articleInfo.main_img}`"
         alt="article"
       />
+      <img v-else class="no-main-img-style" src="@/assets/images/blog-logo-no-text.png" alt="article picture" />
       <div class="img-wrap-mark"></div>
     </div>
     <div class="item-content">
       <div class="item-content-time">
+        <img />
         <span class="author-name">By {{ articleInfo.author }}</span>
         <span class="step"></span>
         <span class="article-time">{{ articleInfo.publish_time }}</span>
@@ -59,14 +58,22 @@ defineProps({
 .item-top
   transition all 0.6s
   position relative
-  width 377px
-  height 301px
+  width 357px
+  height 371px
   overflow hidden
   box-shadow 0 1px 15px rgba(0,0,0,0.04)
+  border-radius 12px
+  background-color #f0f0f5
+  display flex
+  align-items center
+  justify-content center
   img
     max-width 100%
     max-height 100%
     transition all 0.6s
+.no-main-img-style
+  width 60px
+  height 60px
 .img-wrap-mark
   transition all 0.6s
   opacity 0

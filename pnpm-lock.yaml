@@ -4,6 +4,10 @@ specifiers:
   nuxt: 3.0.0-rc.6
   nuxt-proxy: ^0.2.3
   stylus: ^0.57.0
+  vue3-carousel: ^0.1.46
+
+dependencies:
+  vue3-carousel: 0.1.46
 
 devDependencies:
   nuxt: 3.0.0-rc.6_stylus@0.57.0
@@ -4731,6 +4735,12 @@ packages:
       '@vue/server-renderer': 3.2.37_vue@3.2.37
       '@vue/shared': 3.2.37
     dev: true
+
+  /vue3-carousel/0.1.46:
+    resolution: {integrity: sha512-bBZRpt5vuaS3SYkyt3pF5N+VWTKrDlYeNnLKKwePcrGu77AKqZjofFR113tZi4aFF7rblvk8WqFdBWTNX+yZcg==}
+    peerDependencies:
+      vue: ^3.2.0
+    dev: false
 
   /wcwidth/1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
