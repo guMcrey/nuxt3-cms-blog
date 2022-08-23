@@ -1,10 +1,10 @@
 <template>
   <div class="page-index">
-    <div class="index-latest-title">Latest</div>
+    <Header></Header>
+    <div class="index-article-title">Articles</div>
     <ul class="latest-list">
-      <LatestArticles></LatestArticles>
+      <PopularSwiper></PopularSwiper>
     </ul>
-    <div class="index-all-title">All</div>
     <ul class="all-news-list">
       <AllArticles
         v-for="item in allArticle"
@@ -75,24 +75,32 @@ const clickItemHandler = (articleId: number) => {
 .page-index
   padding 0 100px
   margin-bottom 50px
-.index-latest-title
-  font-size 24px
-  margin-top 30px
-.latest-list
-  margin-top 30px
-.index-all-title
-  font-size 24px
-  margin-top 60px
-  color #1C2B33
-.all-news-list
+.index-article-title
+  color #0D0230
+  font-size 19px
+  margin-top 25px
+  font-family 'NotoSans'
+  font-weight 700
   display flex
-  gap 80px 45px
+  flex-direction row
+  &:before, &:after
+    content ''
+    flex 1 1
+    border-bottom 1px solid #F0F0F3
+    margin auto
+  &:before
+    margin-right 20px
+  &:after
+    margin-left 20px
+.latest-list
+  margin-top 20px
+.all-news-list
+  margin-top 50px
+  display flex
+  gap 50px 45px
   align-items flex-start
   justify-content flex-start
   flex-wrap wrap
-.all-news-list
-  margin-top 30px
-
 // load more
 .load-more-area
   margin 65px 0 80px

@@ -10,5 +10,8 @@
     "nuxt": "3.0.0-rc.6",
     "nuxt-proxy": "^0.2.3",
     "stylus": "^0.57.0"
+  },
+  "dependencies": {
+    "vue3-carousel": "^0.1.46"
   }
 }
