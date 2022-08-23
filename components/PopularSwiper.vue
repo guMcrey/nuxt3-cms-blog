@@ -1,5 +1,6 @@
 <template>
   <Carousel :autoplay="5000" :wrap-around="true">
+    <!-- TODO: -->
     <Slide v-for="slide in 10" :key="slide">
       <div class="carousel__item">
         <div class="carousel__item-author">
