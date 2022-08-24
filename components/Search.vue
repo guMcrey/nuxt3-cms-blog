@@ -1,29 +1,28 @@
 <template>
-  <div class="search-wrapper" @click.self="closeMaskHandler">
-    <div class="wrapper-area">
-      <div class="input-wrapper">
-        <img
-          class="search-icon"
-          src="@/assets/images/icons/search.svg"
-          alt="search"
-        />
-        <div
-          ref="inputRef"
-          class="input-bar"
-          contenteditable="true"
-          placeholder="Search articles"
-          :value="inputValue"
-          @input="inputHandler"
-          @keydown.enter="keydownHandler"
-        ></div>
-        <div
-          :class="inputValue ? 'clear-bar' : 'clear-bar-disabled'"
-          @click="clearInputHandler"
-        >
-          Clear
-        </div>
+  <div class="wrapper-area">
+    <div class="input-wrapper">
+      <img
+        class="search-icon"
+        src="@/assets/images/icons/search.svg"
+        alt="search"
+      />
+      <div
+        ref="inputRef"
+        class="input-bar"
+        contenteditable="true"
+        placeholder="Search articles"
+        :value="inputValue"
+        @input="inputHandler"
+        @keydown.enter="keydownHandler"
+      ></div>
+      <div
+        :class="inputValue ? 'clear-bar' : 'clear-bar-disabled'"
+        @click="clearInputHandler"
+      >
+        Clear
       </div>
-      <ul :class="showList ? 'article-list' : 'article-list-area'">
+    </div>
+    <ul class="article-list">
         <template v-if="inputValue && searchArticleList?.length">
           <li
             class="article-list-item"
@@ -55,16 +54,15 @@
           No result found.
         </div>
       </ul>
-    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import {watch} from 'vue'
 const router = useRouter()
 const inputRef = ref()
 const inputValue = ref('')
 let count = 0
-const showList = ref(false)
 const searchArticleList = ref<any[]>([])
 
 const emits = defineEmits(['close'])
@@ -78,13 +76,12 @@ const searchHandler = async () => {
     `http://localhost:3001/api/articles?title=${inputValue.value}&publish_status=publish`,
     {key: inputValue.value}
   )
-  searchArticleList.value = (searchArticle.value as any).result || []
+  searchArticleList.value = (searchArticle.value as any)?.result || []
 }
 
 const inputHandler = (event: any) => {
   if (event.data) {
     inputValue.value += event.data
-    showList.value = true
     count += 1
   } else {
     // remove keydown clear
@@ -96,7 +93,6 @@ const inputHandler = (event: any) => {
       count--
     } else {
       inputValue.value = ''
-      showList.value = false
     }
   }
 }
@@ -109,7 +105,6 @@ const keydownHandler = (event: any) => {
 const clearInputHandler = () => {
   inputRef.value.innerHTML = ''
   inputValue.value = ''
-  showList.value = !showList.value
   searchArticleList.value = []
 }
 
@@ -137,48 +132,31 @@ watch(
 </script>
 
 <style lang="stylus" scoped>
-.search-wrapper
-  position fixed
-  top 0
-  right 0
-  bottom 0
-  left 0
-  background-color rgba(244, 244, 245, 0.7)
-  z-index 999
-  display flex
-  justify-content center
-  backdrop-filter blur(8px)
-.wrapper-area
-  position absolute
-  padding 10px 25px
-  top 15%
-  width 45%
-  background-color #fff
-  box-shadow inset 0px 0px 0 0 hsla(0,0%,100%,0.4),0 3px 5px 0 #5f4b6d
-  border-radius 12px
-  max-height 600px
-  transition all 6s
 .wrapper-area-disable
   max-height 0px
-  transition all 6s
 .input-wrapper
+  position relative
   display flex
   align-items center
   gap 8px
+  padding 4px 20px
+  width 340px
+  background-color #F0F0F3
+  border-radius 50px
+  box-sizing border-box
+  z-index 2
 .input-bar
   width 100%
-  padding 12px
-  font-size 18px
+  padding 8px
+  font-size 16px
 .search-icon
-  width 20px
+  width 19px
   height auto
   position relative
-  left -1024px
-  filter drop-shadow(#a3a3a3 1024px 0)
 .input-bar:empty:before
     content attr(placeholder)
-    color #a3a3a3
-    font-size 18px
+    color #7F7A8A
+    font-size 15px
     font-family 'NotoSans'
     font-weight 400
 .input-bar[contenteditable]
@@ -195,27 +173,31 @@ watch(
   opacity 0
   transition all 0.3s
 .article-list
-  width 100%
-  transition all 4s
-  max-height 600px
-  margin-bottom 10px
+  position absolute
+  top 20px
+  left 0
+  right 0
+  width 338px
+  max-height 300px
+  margin-bottom 10px 
   overflow hidden
-.article-list-area
-  max-height 0
-  transition all 5s
+  z-index 1
+  border 1px solid rgba(0, 0, 0, 0.1)
+  background-color #fff
+  z-index 1
+  border-radius 0 0 12px 12px
 .article-list-item
-  padding 13px 8px
+  padding 7px 10px
   display flex
   align-items center
   border-bottom 1px solid #f1f1f1
-  transition height 3s
   cursor pointer
   &:hover
     background-color rgba(244,244,244,0.6)
     transition background 0.3s
     border-radius 8px
   &:first-child
-    margin-top 10px
+    margin-top 30px
   &:last-child
     border-bottom none
 .list-item-img-wrap
@@ -237,28 +219,31 @@ watch(
   text-overflow ellipsis
   overflow hidden
 .item-content-title
-  font-size 16px
+  font-size 15px
   font-family "NotoSans"
   font-weight 500
-  color #333
+  color #0D0230
 .item-content-subtitle
   font-size 13px
   font-family "NotoSans"
   font-weight 400
-  color #737373
+  color #848193
   margin-top 3px
   white-space nowrap
   text-overflow ellipsis
   overflow hidden
 .no-result-found
+  margin-top 30px
   display flex
   align-items center
   justify-content center
-  margin-top 15px
   padding 12px
   color #737373
+  font-size 13px
+  font-family 'NotoSans'
+  font-weight 400 
   img
-    width 40px
+    width 20px
     height auto
     padding-right 15px
 </style>

@@ -5,8 +5,7 @@
         <div class="header-top-subtitle">All the articles and contents of the site have been updated today and you can find your articles and contents quickly and without and problems.</div>
     </div>
     <div class="header-bottom">
-        <div class="header-bottom-search">
-        </div>
+        <Search />
         <ul class="header-bottom-tags">
             <div v-for="tItem in tagList" :key="tItem.name" :class="tItem.isChecked ? 'bottom-tags-item active-tag' : 'bottom-tags-item'" @click="clickTagsHandler(tItem.name)">{{tItem.name}}</div>
         </ul>
@@ -56,6 +55,7 @@ const clickTagsHandler = (name: string) => {
   line-height 1.7em
   max-width 50%
 .header-bottom
+  position relative
   margin-top 30px
   display flex
   align-items center

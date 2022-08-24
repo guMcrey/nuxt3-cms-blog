@@ -11,7 +11,7 @@
     </div>
     <div class="item-content">
       <div class="item-content-time">
-        <img />
+        <img class="author-avatar" src="@/assets/images/author-avatar.jpeg" alt="avatar" />
         <span class="author-name">By {{ articleInfo.author }}</span>
         <span class="step"></span>
         <span class="article-time">{{ articleInfo.publish_time }}</span>
@@ -55,6 +55,13 @@ defineProps({
     cursor pointer
   &:hover .img-wrap-mark
     opacity 1
+  &:hover .item-footer .more-text
+    color #8500FE
+  &:hover .item-footer .more-icon
+    position relative
+    left -421px
+    filter drop-shadow(#8500fe 421px 0)
+    transition all 0.2s
 .item-top
   transition all 0.6s
   position relative
@@ -84,11 +91,18 @@ defineProps({
   left 0
   background-color rgba(0, 0, 0, 0.1)
 .item-content-time
+  display flex
+  align-items center
   margin-top 15px
-  color #374857
+  color #848193
   font-size 13px
   font-family 'NotoSans'
   font-weight 400
+  .author-avatar
+    width 25px
+    height 25px
+    border-radius 50%
+    margin-right 10px
   .step
     display inline-block
     width 3px
@@ -99,14 +113,14 @@ defineProps({
     vertical-align middle
 .item-content-title
   margin-top 12px
-  color #1c2b33
+  color #0D0230
   font-weight 600
-  font-size 18px
+  font-size 19px
   font-family 'NotoSans'
   font-weight 500
 .item-content-description
   margin-top 12px
-  color #1c2b33
+  color #848193
   font-size 15px
   line-height 24px
   display -webkit-box
